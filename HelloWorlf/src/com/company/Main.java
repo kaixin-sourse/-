@@ -2,53 +2,113 @@ package com.company;
 import com.company.entity.*;
 
 import java.math.BigInteger;
+import java.util.*;
+import java.util.function.Consumer;
 
 public class Main {
 
+    public static void test1() {
+        try{
+            Object object = "abc";
+            object.toString();
+        } catch(NullPointerException  | ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println("我是finally");
+        }
+        System.out.println("程序继续正常运行");
+        Random random = new Random();
+        System.out.println(random.nextInt(100));
+    }
+
 
     public static void main(String[] args) {
-	// write your code here
-        Person person = new Person("",18,"");
-        person.SetName("大明");
-        System.out.println(person.getName());
-        Worker worker = new Worker("",18,"");
-        System.out.println(worker.name);
-        Student student = new Student("",18,"");
-        System.out.println(student.name);
+	    // write your code here
+        List<String> list1 = new ArrayList<>();
+        list1.add("BBB");
+        list1.add("AAA");
+        list1.sort(String::compareTo); //排序
+        System.out.println(list1);
 
-        Person person1 = new Person("小明",18,"男");
-        Person person2 = new Person("小明",18,"男");
-        System.out.println(person1.equals(person2)); //重写覆盖方法
-        System.out.println(person1 == person2);
-
-        Study student1 = new Student("小明",17,"男");
-        student1.study();
-        student1.test();
-        Study ss = new Worker("小明",17,"男");
-        ss.test();
-
-        Student student2 = new Student("小明",17,"男");
-        student2.setStatus(Status.RUNNING);
-        System.out.println(student2.getStatus().getName()); //获取中文名字
-
-        String str = "666";
-        Integer i = new Integer(str);
-        System.out.println(i*10);
-        Integer a = 123;
-        //System.out.println(Integer.reverse(12));
-        BigInteger ii = BigInteger.valueOf(Long.MAX_VALUE);
-        System.out.println(ii.multiply(BigInteger.valueOf(Long.MAX_VALUE))); //如果使用普通的乘法就会溢出，但是BigInteger可以保存
-        System.out.println(ii);
-
-        String str1 = "oaaa";
-        System.out.println(str1.matches("oa+"));
-
-        String str2 = "ooooooo";
-        System.out.println(str2.matches("o+"));
-        String str3 = "ooooooo";
-        System.out.println(str2.matches("o{7}"));
+        List list2 = new ArrayList<>(Arrays.asList("aaa","bbb","ccc"));
+        List list3 = new ArrayList();
+        list3.addAll(Arrays.asList("aaa","bbb","ccc"));
 
 
 
+        ArrayList<String> list = new ArrayList<>();
+        list.add(0,"aaa");
+        System.out.println(list);
+        list.add(0,"bbb");
+        System.out.println(list);
+    }
+
+    public static void test3() {
+        Score<String> score1 = new Score<String>("gaoshu","xxxxx","优秀");
+        Score<Integer> score2 = new Score<Integer>("gaoshu","xxxxx",99);
+        System.out.println(score1.getValue());
+        System.out.println(score2.getValue());
+
+    }
+
+    public static void test_hanoi() {
+        hanoi('a','b','c',3);
+    }
+    public static void hanoi(char a, char b, char c, int n) {
+        if(n == 1) {
+            System.out.println(a + " -->" + c);
+        } else {
+            hanoi(a,c,b, n - 1);
+            System.out.println(a + " -->" + c);
+            hanoi(b,a,c,n - 1);
+        }
+    }
+
+    public static void test_duichen() {
+        Scanner scanner = new Scanner(System.in);
+        String str = scanner.nextLine();
+        System.out.println(duichen(str.toCharArray()));
+        System.out.println(duichen(str.toCharArray()));
+    }
+
+    public static boolean duichen(char[] str) {
+        int i = 0, j = str.length - 1;
+        while(i < j) {
+            if(str[i] != str[j]) return false;
+            i ++;
+            j --;
+        }
+        return true;
+    }
+
+    public static void test_sort() {
+        int[] arr = new int[]{3,4,5,6,3,45,345,345,2,1};
+        bupper_sort(arr);
+        for(int i : arr) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public static void bupper_sort(int[] arr) {
+        for(int i = 0; i < arr.length; i ++) {
+            boolean flag = true;
+            for(int j = 0; j < arr.length - i - 1; j ++) {
+                if(arr[j] > arr[j + 1]) {
+                    flag = false;
+                    int tt = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = tt;
+                }
+            }
+            if(flag == true) {
+                return;
+            }
+        }
+    }
+    private static int test(int a,int b) {
+        if(b==0) throw new ArithmeticException("出书不能为0");
+        return a / b;
     }
 }
