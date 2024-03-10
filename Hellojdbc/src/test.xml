@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<outer>
+<!--    -->
+    <name><![CDATA[<><>><<<<阿伟]]></name>
+    <desc>怎么又在玩电动啊</desc>
+    <inner type="1">
+        <age>1&lt;0</age>
+        <sex>男</sex>
+    </inner>
+</outer>
